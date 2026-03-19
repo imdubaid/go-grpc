@@ -1,0 +1,35 @@
+syntax = "proto3";
+package coffeeshop;
+
+option go_package = "github.com/imdubaid/grpc";
+
+service CoffeeShop {
+    rpc GetMenu(MenuRequest) returns (stream Menu) {}
+    rpc PlaceOrder(Order) returns (Receipt) {}
+    rpc GetOrderStatus(Receipt) returns (OrderStatus) {}
+}
+
+
+message MenuRequest {}
+
+message Order {
+    repeated Item items = 1;
+}
+
+message Receipt {
+    string Id = 1;
+}
+
+message OrderStatus {
+    string OrderId = 1;
+    string Status = 2;
+}
+
+message Menu {
+    repeated Item items = 1;
+}
+
+message Item {
+    string Id = 1;
+    string Name = 2;
+}
