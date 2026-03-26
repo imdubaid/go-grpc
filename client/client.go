@@ -12,12 +12,12 @@ import (
 )
 
 func main() {
-	// Create a new grpc client
 	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+
 	if err != nil {
-		log.Fatalf("failed to connect to gRPC server at localhost:50051: %v", err)
+		log.Panic("GRPC Dial error:", err)
 	}
-	// dont forget to close it
+
 	defer conn.Close()
 
 	// create a new coffee shop client from our generated code and pass in the connection created above
